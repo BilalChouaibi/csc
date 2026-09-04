@@ -42,7 +42,7 @@
       margin-bottom: 30px;
     }
 
-    /* TITRE COMME SUR TON IMAGE */
+    /* TITRE */
     h1 {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
@@ -57,7 +57,6 @@
       display: inline-block;
     }
 
-    /* MARQUAGE SUR LE DERNIER L */
     .last-l {
       position: relative;
       display: inline-block;
@@ -154,7 +153,6 @@
       filter: brightness(1.02);
     }
 
-    /* POST-IT AGRANDI AU TOUCHER */
     .note.active {
       transform: rotate(0deg) scale(1.06);
       box-shadow: 14px 18px 0 rgba(0,0,0,.18);
@@ -197,22 +195,104 @@
     }
 
     /* COULEURS */
-    .pink { background: var(--pink); }
-    .blue { background: var(--blue); }
-    .purple { background: var(--purple); }
-    .yellow { background: var(--yellow); }
-    .peach { background: var(--peach); }
+    .pink {
+      background: var(--pink);
+    }
+
+    .blue {
+      background: var(--blue);
+    }
+
+    .purple {
+      background: var(--purple);
+    }
+
+    .yellow {
+      background: var(--yellow);
+    }
+
+    .peach {
+      background: var(--peach);
+    }
 
     /* ROTATIONS ET POSITIONS */
-    .n1 { grid-column: span 3; --rotation: -2deg; --float: -.5s; }
-    .n2 { grid-column: span 3; --rotation: 2deg; --float: -1.8s; }
-    .n3 { grid-column: span 3; --rotation: -1deg; --float: -3.1s; }
-    .n4 { grid-column: span 3; --rotation: 1deg; --float: -4.4s; }
-    .n5 { grid-column: span 3; --rotation: -1deg; --float: -2.3s; }
-    .n6 { grid-column: span 3; --rotation: 1deg; --float: -3.6s; }
-    .n7 { grid-column: span 3; --rotation: -2deg; --float: -.8s; }
-    .n8 { grid-column: span 3; --rotation: 2deg; --float: -4.8s; }
-    .n9 { grid-column: 10 / span 3; --rotation: -1deg; --float: -2.7s; }
+    .n1 {
+      grid-column: span 3;
+      --rotation: -2deg;
+      --float: -.5s;
+    }
+
+    .n2 {
+      grid-column: span 3;
+      --rotation: 2deg;
+      --float: -1.8s;
+    }
+
+    .n3 {
+      grid-column: span 3;
+      --rotation: -1deg;
+      --float: -3.1s;
+    }
+
+    .n4 {
+      grid-column: span 3;
+      --rotation: 1deg;
+      --float: -4.4s;
+    }
+
+    .n5 {
+      grid-column: span 3;
+      --rotation: -1deg;
+      --float: -2.3s;
+    }
+
+    .n6 {
+      grid-column: span 3;
+      --rotation: 1deg;
+      --float: -3.6s;
+    }
+
+    .n7 {
+      grid-column: span 3;
+      --rotation: -2deg;
+      --float: -.8s;
+    }
+
+    .n8 {
+      grid-column: span 3;
+      --rotation: 2deg;
+      --float: -4.8s;
+    }
+
+    .n9 {
+      grid-column: span 3;
+      --rotation: -1deg;
+      --float: -2.7s;
+    }
+
+    .n10 {
+      grid-column: span 3;
+      --rotation: 2deg;
+      --float: -1.2s;
+    }
+
+    .n11 {
+      grid-column: span 3;
+      --rotation: -2deg;
+      --float: -3.8s;
+    }
+
+    .n12 {
+      grid-column: span 3;
+      --rotation: 1deg;
+      --float: -2.1s;
+    }
+
+    .n13 {
+      grid-column: span 3;
+      --rotation: -1deg;
+      --float: -4.2s;
+    }
 
     .bottom {
       display: flex;
@@ -234,7 +314,8 @@
     /* TABLETTE */
     @media (max-width: 900px) {
       .n1, .n2, .n3, .n4, .n5,
-      .n6, .n7, .n8, .n9 {
+      .n6, .n7, .n8, .n9, .n10,
+      .n11, .n12, .n13 {
         grid-column: span 4;
       }
     }
@@ -264,7 +345,8 @@
       }
 
       .n1, .n2, .n3, .n4, .n5,
-      .n6, .n7, .n8, .n9 {
+      .n6, .n7, .n8, .n9, .n10,
+      .n11, .n12, .n13 {
         grid-column: span 1;
       }
 
@@ -329,47 +411,116 @@
 
       <article class="note pink n1" tabindex="0">
         <h2>CAFÉ ET BLABLA</h2>
-        <p>1 vendredi matin par mois un moment convivial autour d'un café/thé et de discussions libres ou thématiques</p>
+        <p>
+          1 vendredi matin par mois un moment convivial autour d'un café/thé
+          et de discussions libres ou thématiques
+        </p>
       </article>
 
       <article class="note blue n2" tabindex="0">
         <h2>RIGO'JEUX</h2>
-        <p>1 samedi par mois Samedi Rigo'jeux est un atelier jeux de sociétés parents-enfants convivial et gratuit</p>
+        <p>
+          1 samedi par mois Samedi Rigo'jeux est un atelier jeux de sociétés
+          parents-enfants convivial et gratuit
+        </p>
       </article>
 
       <article class="note purple n3" tabindex="0">
         <h2>JARDIN D'ELSA</h2>
-        <p>Le jardin est conçu comme un lieu de vie, de rencontre et de transmission ouvert à tous les participants autour de la plantation de la culture de la découverte de la biodiversité...</p>
+        <p>
+          Le jardin est conçu comme un lieu de vie, de rencontre et de
+          transmission ouvert à tous les participants autour de la plantation
+          de la culture de la découverte de la biodiversité...
+        </p>
       </article>
 
       <article class="note blue n4" tabindex="0">
         <h2>LE CERCLE DES COULEURS</h2>
-        <p>Le cercle de jeux est une activité conviviale permettant aux participants de se retrouver régulièrement autour de jeux de société, de jeux de cartes et de jeux de réflexion.</p>
+        <p>
+          Le cercle de jeux est une activité conviviale permettant aux
+          participants de se retrouver régulièrement autour de jeux de société,
+          de jeux de cartes et de jeux de réflexion.
+        </p>
       </article>
 
       <article class="note yellow n5" tabindex="0">
         <h2>LES DÉLICES DU JEUDI</h2>
-        <p>1 fois par mois, le deuxième jeudi du mois de 14h à 17h créer un lien social entre habitants des différents quartiers autour d'une activité gourmande</p>
+        <p>
+          1 fois par mois, le deuxième jeudi du mois de 14h à 17h créer un
+          lien social entre habitants des différents quartiers autour d'une
+          activité gourmande
+        </p>
       </article>
 
       <article class="note peach n6" tabindex="0">
         <h2>FRIGO CHALLENGE</h2>
-        <p>Un projet ludique, anti-gaspi et un peu challenge autour de la question : "qu'est ce que je fais avec ce qu'il y a dans mon frigo?"</p>
+        <p>
+          Un projet ludique, anti-gaspi et un peu challenge autour de la
+          question : "qu'est ce que je fais avec ce qu'il y a dans mon frigo?"
+        </p>
       </article>
 
       <article class="note blue n7" tabindex="0">
         <h2>LA SARBACANE</h2>
-        <p>La Sarbacane sportive est une activité de précision qui consiste à travers un tube, uniquement grâce au souffle, à atteindre une cible.</p>
+        <p>
+          La Sarbacane sportive est une activité de précision qui consiste
+          à travers un tube, uniquement grâce au souffle, à atteindre une cible.
+        </p>
       </article>
 
       <article class="note peach n8" tabindex="0">
         <h2>ARTS URBAINS</h2>
-        <p>Le projet Arts urbains propose de faire découvrir différentes formes d'expression artistique inspirées de la culture urbaine</p>
+        <p>
+          Le projet Arts urbains propose de faire découvrir différentes formes
+          d'expression artistique inspirées de la culture urbaine
+        </p>
       </article>
 
       <article class="note yellow n9" tabindex="0">
         <h2>LE CAFÉ NATURE</h2>
-        <p>Le café Nature est un moment convivial consacré à la découverte et à l'échange autour de la nature, de l'environnement, de la pêche, de la chasse ...</p>
+        <p>
+          Le café Nature est un moment convivial consacré à la découverte et
+          à l'échange autour de la nature, de l'environnement, de la pêche,
+          de la chasse ...
+        </p>
+      </article>
+
+      <!-- NOUVEAUX ATELIERS -->
+
+      <article class="note pink n10" tabindex="0">
+        <h2>ÉLECTRONS LIBRES</h2>
+        <p>
+          Ensemble d'ateliers destinés aux centres de loisirs et aux services
+          jeunesse. Chaque atelier s'appuie sur un thème prédéfini issu d'un
+          « tableau des idées », conçu par des enfants pour des enfants.
+        </p>
+      </article>
+
+      <article class="note blue n11" tabindex="0">
+        <h2>ATELIER VOLT</h2>
+        <p>
+          Projet en cours de création. Ensemble d'ateliers dédiés à la
+          découverte de l'électronique, à la conception de projets et à la
+          customisation d'objets électroniques existants.
+        </p>
+      </article>
+
+      <article class="note yellow n12" tabindex="0">
+        <h2>LA FABRIQUE ASSOCIATIVE</h2>
+        <p>
+          Ensemble d'ateliers destinés aux associations, conçus sur mesure pour
+          répondre à leurs besoins. Les interventions peuvent inclure le
+          prototypage, le flocage, ainsi que la modélisation et l'impression 3D.
+        </p>
+      </article>
+
+      <article class="note peach n13" tabindex="0">
+        <h2>ESPRITS CRÉATIFS</h2>
+        <p>
+          Ensemble d'ateliers destinés aux habitants, principalement consacrés
+          à la découverte du FabLab et à l'initiation à l'utilisation et à la
+          maintenance des machines : impression 3D, flocage, broderie, etc.
+        </p>
       </article>
 
     </section>
