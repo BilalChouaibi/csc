@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programmation Des Centre socioculturel</title>
+
+  <style>
+    :root {
+      --ink: #000;
+      --pink: #f5bfd9;
+      --blue: #a9ddf1;
+      --purple: #cda8e8;
+      --yellow: #ffe99a;
+      --peach: #ffc39f;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 20% 10%, rgba(255,255,255,.9), transparent 28%),
+        radial-gradient(circle at 80% 80%, rgba(220,215,200,.35), transparent 30%),
+        linear-gradient(135deg, #faf9f5, #eeeae0);
+    }
+
+    .site {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+      padding: 28px 18px 40px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 30px;
+    }
+
+    /* TITRE COMME SUR TON IMAGE */
+    h1 {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: clamp(1.45rem, 4vw, 2.7rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+      color: #292929;
+      background: #bdbdbd;
+      padding: 0 4px 3px 2px;
+      transform: rotate(-1deg);
+      display: inline-block;
+    }
+
+    /* MARQUAGE SUR LE DERNIER L */
+    .last-l {
+      position: relative;
+      display: inline-block;
+    }
+
+    .last-l::after {
+      content: "";
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: #777;
+    }
+
+    /* BOUTONS INSCRIPTIONS */
+    .register {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 12px 20px;
+      background: var(--yellow);
+      color: #000;
+      text-decoration: none;
+      font-family: "Trebuchet MS", Arial, sans-serif;
+      font-size: 1rem;
+      font-weight: 800;
+      border: 1px solid rgba(0,0,0,.12);
+      box-shadow: 5px 7px 0 rgba(0,0,0,.14);
+      transform: rotate(2deg);
+      transition: transform .25s ease, box-shadow .25s ease;
+      position: relative;
+      touch-action: manipulation;
+    }
+
+    .register::before {
+      content: "";
+      position: absolute;
+      top: -8px;
+      left: 50%;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #dc706f;
+      box-shadow: inset -3px -3px 0 rgba(0,0,0,.12);
+    }
+
+    .register:hover,
+    .register:focus-visible {
+      transform: rotate(-1deg) translateY(-3px);
+      box-shadow: 7px 10px 0 rgba(0,0,0,.12);
+    }
+
+    /* TABLEAU DE POST-IT */
+    .board {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 26px 22px;
+      align-items: start;
+    }
+
+    .note {
+      --rotation: 0deg;
+      --float: 0s;
+
+      position: relative;
+      padding: 30px 20px 24px;
+      min-height: 205px;
+      color: #000;
+      border: 1px solid rgba(0,0,0,.08);
+      box-shadow: 8px 10px 0 rgba(0,0,0,.15);
+
+      transform: rotate(var(--rotation));
+      animation: float 6s ease-in-out infinite;
+      animation-delay: var(--float);
+
+      transition:
+        transform .35s ease,
+        box-shadow .35s ease,
+        filter .35s ease;
+
+      cursor: pointer;
+      outline: none;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .note:hover,
+    .note:focus-visible {
+      transform: rotate(0deg) translateY(-6px) scale(1.02);
+      box-shadow: 10px 14px 0 rgba(0,0,0,.13);
+      z-index: 2;
+      filter: brightness(1.02);
+    }
+
+    /* POST-IT AGRANDI AU TOUCHER */
+    .note.active {
+      transform: rotate(0deg) scale(1.06);
+      box-shadow: 14px 18px 0 rgba(0,0,0,.18);
+      z-index: 10;
+      filter: brightness(1.03);
+    }
+
+    /* PUNAISE */
+    .note::before {
+      content: "";
+      position: absolute;
+      top: -10px;
+      right: 18px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #d96e6e;
+      box-shadow: inset -3px -3px 0 rgba(0,0,0,.14);
+    }
+
+    .note h2 {
+      margin: 0 0 18px;
+      text-align: center;
+      font-family: "Trebuchet MS", Arial, sans-serif;
+      font-size: clamp(1.15rem, 2.1vw, 1.65rem);
+      line-height: 1.1;
+      font-weight: 900;
+      letter-spacing: -.03em;
+      color: #000;
+    }
+
+    .note p {
+      margin: 0;
+      text-align: center;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.55;
+      color: #000;
+    }
+
+    /* COULEURS */
+    .pink { background: var(--pink); }
+    .blue { background: var(--blue); }
+    .purple { background: var(--purple); }
+    .yellow { background: var(--yellow); }
+    .peach { background: var(--peach); }
+
+    /* ROTATIONS ET POSITIONS */
+    .n1 { grid-column: span 3; --rotation: -2deg; --float: -.5s; }
+    .n2 { grid-column: span 3; --rotation: 2deg; --float: -1.8s; }
+    .n3 { grid-column: span 3; --rotation: -1deg; --float: -3.1s; }
+    .n4 { grid-column: span 3; --rotation: 1deg; --float: -4.4s; }
+    .n5 { grid-column: span 3; --rotation: -1deg; --float: -2.3s; }
+    .n6 { grid-column: span 3; --rotation: 1deg; --float: -3.6s; }
+    .n7 { grid-column: span 3; --rotation: -2deg; --float: -.8s; }
+    .n8 { grid-column: span 3; --rotation: 2deg; --float: -4.8s; }
+    .n9 { grid-column: 10 / span 3; --rotation: -1deg; --float: -2.7s; }
+
+    .bottom {
+      display: flex;
+      justify-content: center;
+      margin-top: 40px;
+    }
+
+    /* ANIMATION LÉGÈRE */
+    @keyframes float {
+      0%, 100% {
+        transform: rotate(var(--rotation)) translateY(0);
+      }
+
+      50% {
+        transform: rotate(calc(var(--rotation) + 1deg)) translateY(-5px);
+      }
+    }
+
+    /* TABLETTE */
+    @media (max-width: 900px) {
+      .n1, .n2, .n3, .n4, .n5,
+      .n6, .n7, .n8, .n9 {
+        grid-column: span 4;
+      }
+    }
+
+    /* TÉLÉPHONE */
+    @media (max-width: 600px) {
+      .site {
+        padding: 22px 14px 32px;
+      }
+
+      .topbar {
+        align-items: flex-start;
+      }
+
+      .topbar h1 {
+        max-width: 60%;
+      }
+
+      .register {
+        font-size: .9rem;
+        padding: 10px 14px;
+      }
+
+      .board {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px 14px;
+      }
+
+      .n1, .n2, .n3, .n4, .n5,
+      .n6, .n7, .n8, .n9 {
+        grid-column: span 1;
+      }
+
+      .note {
+        padding: 25px 13px 18px;
+        min-height: 190px;
+      }
+
+      .note h2 {
+        font-size: 1.1rem;
+        margin-bottom: 14px;
+      }
+
+      .note p {
+        font-size: .88rem;
+        line-height: 1.5;
+      }
+
+      .note.active {
+        transform: rotate(0deg) scale(1.03);
+      }
+    }
+
+    /* ACCESSIBILITÉ */
+    @media (prefers-reduced-motion: reduce) {
+      .note {
+        animation: none;
+      }
+
+      .register,
+      .note {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="site">
+
+    <!-- TITRE + BOUTON DU HAUT -->
+    <header class="topbar">
+
+      <h1>
+        Programmation Des Centre socioculture<span class="last-l">l</span>
+      </h1>
+
+      <a
+        class="register"
+        href="https://forms.gle/bwHJy7rJsUghjX3z8"
+        target="_blank"
+        rel="noopener"
+      >
+        INSCRIPTIONS
+      </a>
+
+    </header>
+
+    <!-- POST-IT -->
+    <section class="board" aria-label="Activités du centre socioculturel">
+
+      <article class="note pink n1" tabindex="0">
+        <h2>CAFÉ ET BLABLA</h2>
+        <p>1 vendredi matin par mois un moment convivial autour d'un café/thé et de discussions libres ou thématiques</p>
+      </article>
+
+      <article class="note blue n2" tabindex="0">
+        <h2>RIGO'JEUX</h2>
+        <p>1 samedi par mois Samedi Rigo'jeux est un atelier jeux de sociétés parents-enfants convivial et gratuit</p>
+      </article>
+
+      <article class="note purple n3" tabindex="0">
+        <h2>JARDIN D'ELSA</h2>
+        <p>Le jardin est conçu comme un lieu de vie, de rencontre et de transmission ouvert à tous les participants autour de la plantation de la culture de la découverte de la biodiversité...</p>
+      </article>
+
+      <article class="note blue n4" tabindex="0">
+        <h2>LE CERCLE DES COULEURS</h2>
+        <p>Le cercle de jeux est une activité conviviale permettant aux participants de se retrouver régulièrement autour de jeux de société, de jeux de cartes et de jeux de réflexion.</p>
+      </article>
+
+      <article class="note yellow n5" tabindex="0">
+        <h2>LES DÉLICES DU JEUDI</h2>
+        <p>1 fois par mois, le deuxième jeudi du mois de 14h à 17h créer un lien social entre habitants des différents quartiers autour d'une activité gourmande</p>
+      </article>
+
+      <article class="note peach n6" tabindex="0">
+        <h2>FRIGO CHALLENGE</h2>
+        <p>Un projet ludique, anti-gaspi et un peu challenge autour de la question : "qu'est ce que je fais avec ce qu'il y a dans mon frigo?"</p>
+      </article>
+
+      <article class="note blue n7" tabindex="0">
+        <h2>LA SARBACANE</h2>
+        <p>La Sarbacane sportive est une activité de précision qui consiste à travers un tube, uniquement grâce au souffle, à atteindre une cible.</p>
+      </article>
+
+      <article class="note peach n8" tabindex="0">
+        <h2>ARTS URBAINS</h2>
+        <p>Le projet Arts urbains propose de faire découvrir différentes formes d'expression artistique inspirées de la culture urbaine</p>
+      </article>
+
+      <article class="note yellow n9" tabindex="0">
+        <h2>LE CAFÉ NATURE</h2>
+        <p>Le café Nature est un moment convivial consacré à la découverte et à l'échange autour de la nature, de l'environnement, de la pêche, de la chasse ...</p>
+      </article>
+
+    </section>
+
+    <!-- BOUTON DU BAS -->
+    <div class="bottom">
+      <a
+        class="register"
+        href="https://forms.gle/bwHJy7rJsUghjX3z8"
+        target="_blank"
+        rel="noopener"
+      >
+        INSCRIPTIONS
+      </a>
+    </div>
+
+  </main>
+
+  <script>
+    const notes = document.querySelectorAll(".note");
+
+    notes.forEach((note) => {
+
+      // TAP SUR UN POST-IT
+      note.addEventListener("click", (event) => {
+        event.stopPropagation();
+
+        notes.forEach((other) => {
+          if (other !== note) {
+            other.classList.remove("active");
+          }
+        });
+
+        note.classList.toggle("active");
+      });
+
+      // EFFET SOURIS SUR ORDINATEUR
+      note.addEventListener("pointermove", (event) => {
+        if (event.pointerType === "touch") return;
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+        const rect = note.getBoundingClientRect();
+        const x = (event.clientX - rect.left) / rect.width - 0.5;
+        const y = (event.clientY - rect.top) / rect.height - 0.5;
+
+        note.style.transform =
+          `rotate(${x * 2.5}deg) translate(${x * 2}px, ${y * -3}px)`;
+      });
+
+      note.addEventListener("pointerleave", () => {
+        if (!note.classList.contains("active")) {
+          note.style.transform = "";
+        }
+      });
+
+      // CLAVIER
+      note.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          note.click();
+        }
+      });
+
+    });
+
+    // TAP AILLEURS : REFERME LE POST-IT
+    document.addEventListener("click", () => {
+      notes.forEach((note) => {
+        note.classList.remove("active");
+      });
+    });
+  </script>
+
+</body>
+</html>
