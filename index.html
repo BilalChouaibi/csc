@@ -119,11 +119,89 @@
       align-items: start;
     }
 
+    .weekly-schedule {
+      margin-bottom: 42px;
+    }
+
+    .schedule-heading {
+      margin: 0 0 18px;
+      text-align: center;
+      font-family: "Trebuchet MS", Arial, sans-serif;
+      font-size: 1.5rem;
+      font-weight: 900;
+    }
+
+    .week-board {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 14px;
+      align-items: start;
+      padding: 20px 16px;
+      border: 1px solid rgba(0, 0, 0, .08);
+      background-color: #b98552;
+      background-image:
+        radial-gradient(ellipse at 20% 30%, rgba(255, 240, 205, .22) 0 1px, transparent 1.6px),
+        radial-gradient(ellipse at 70% 65%, rgba(83, 49, 25, .16) 0 1px, transparent 1.7px),
+        repeating-linear-gradient(8deg, rgba(255, 243, 215, .035) 0 2px, rgba(87, 49, 22, .035) 2px 4px),
+        linear-gradient(135deg, #c59665, #ad7748);
+      background-size: 19px 17px, 23px 21px, 100% 8px, auto;
+      box-shadow: 6px 8px 0 rgba(0, 0, 0, .1);
+    }
+
+    .week-day {
+      display: flex;
+      min-width: 0;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .week-day h3 {
+      position: relative;
+      align-self: center;
+      width: min(100%, 126px);
+      margin: 0 0 4px;
+      padding: 12px 6px 8px;
+      text-align: center;
+      font-family: "Trebuchet MS", Arial, sans-serif;
+      font-size: .95rem;
+      font-weight: 900;
+      line-height: 1;
+      background: #fff5e6;
+      border: 1px solid rgba(0, 0, 0, .1);
+      box-shadow: 2px 3px 0 rgba(0, 0, 0, .14);
+      transform: rotate(-1deg);
+    }
+
+    .week-day h3::before {
+      content: "";
+      position: absolute;
+      top: -6px;
+      left: 50%;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #d96e6e;
+      box-shadow: inset -2px -2px 0 rgba(0, 0, 0, .14);
+      transform: translateX(-50%);
+    }
+
+    .empty-day {
+      align-self: center;
+      margin: 28px 0;
+      color: #704b3a;
+      font-family: "Trebuchet MS", Arial, sans-serif;
+      font-size: .9rem;
+      font-weight: 800;
+      text-align: center;
+      transform: rotate(-12deg);
+    }
+
     .note {
       --rotation: 0deg;
       --float: 0s;
 
       position: relative;
+      min-width: 0;
       padding: 30px 20px 24px;
       min-height: 205px;
       color: #000;
@@ -182,6 +260,7 @@
       font-weight: 900;
       letter-spacing: -.03em;
       color: #000;
+      overflow-wrap: anywhere;
     }
 
     .note p {
@@ -192,6 +271,44 @@
       font-weight: 500;
       line-height: 1.55;
       color: #000;
+    }
+
+    .schedule-note {
+      min-height: 84px;
+      padding: 20px 10px 9px;
+      --rotation: -1deg;
+      --float: -1.2s;
+      animation: pinboard-sway 4.8s ease-in-out infinite;
+      animation-delay: var(--float);
+    }
+
+    @keyframes pinboard-sway {
+      0%, 100% {
+        rotate: -.6deg;
+      }
+
+      50% {
+        rotate: .6deg;
+      }
+    }
+
+    .schedule-note::before {
+      top: -8px;
+      right: 12px;
+      width: 16px;
+      height: 16px;
+    }
+
+    .schedule-note h2 {
+      margin-bottom: 8px;
+      font-size: .95rem;
+      overflow-wrap: anywhere;
+    }
+
+    .schedule-note p {
+      font-size: .8rem;
+      line-height: 1.4;
+      overflow-wrap: anywhere;
     }
 
     /* COULEURS */
@@ -313,6 +430,10 @@
 
     /* TABLETTE */
     @media (max-width: 900px) {
+      .week-board {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
       .n1, .n2, .n3, .n4, .n5,
       .n6, .n7, .n8, .n9, .n10,
       .n11, .n12, .n13 {
@@ -324,14 +445,20 @@
     @media (max-width: 600px) {
       .site {
         padding: 22px 14px 32px;
+        overflow-x: clip;
       }
 
       .topbar {
+        flex-direction: column;
         align-items: flex-start;
       }
 
       .topbar h1 {
-        max-width: 60%;
+        max-width: 100%;
+      }
+
+      .topbar .register {
+        align-self: flex-end;
       }
 
       .register {
@@ -340,8 +467,36 @@
       }
 
       .board {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 18px 14px;
+      }
+
+      .week-board {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px 12px;
+        padding: 16px 10px;
+      }
+
+      .week-day {
+        gap: 12px;
+      }
+
+      .week-day h3 {
+        font-size: .98rem;
+      }
+
+      .schedule-note {
+        min-height: 100px;
+        padding: 22px 10px 12px;
+      }
+
+      .schedule-note h2 {
+        font-size: .88rem;
+        margin-bottom: 7px;
+      }
+
+      .schedule-note p {
+        font-size: .75rem;
       }
 
       .n1, .n2, .n3, .n4, .n5,
@@ -353,6 +508,11 @@
       .note {
         padding: 25px 13px 18px;
         min-height: 190px;
+      }
+
+      .schedule-note {
+        min-height: 72px;
+        padding: 20px 10px 9px;
       }
 
       .note h2 {
@@ -395,16 +555,102 @@
         Programmation Du CSC Louis Aragon<span class="last-l"></span>
       </h1>
 
-      <a
-        class="register"
-        href="https://forms.gle/bwHJy7rJsUghjX3z8"
-        target="_blank"
-        rel="noopener"
-      >
+      <button class="register" type="button">
         INSCRIPTIONS
-      </a>
+      </button>
 
     </header>
+
+    <section class="weekly-schedule" aria-labelledby="schedule-heading">
+      <h2 class="schedule-heading" id="schedule-heading">LES ATELIERS DE LA SEMAINE</h2>
+      <div class="week-board">
+        <section class="week-day" aria-label="Lundi">
+          <h3>Lundi</h3>
+          <p class="empty-day">Pas d’atelier pour l’instant</p>
+        </section>
+
+        <section class="week-day" aria-label="Mardi">
+          <h3>Mardi</h3>
+          <article class="note schedule-note pink" tabindex="0">
+            <h2>ESPRIT CRÉATIF</h2>
+            <p>14h00 à 17h30<br>Sur rendez-vous</p>
+          </article>
+          <article class="note schedule-note blue" tabindex="0">
+            <h2>PARENT ’AISE</h2>
+            <p>14h00 à 16h00</p>
+          </article>
+          <article class="note schedule-note yellow" tabindex="0">
+            <h2>PASSERELLE INTERGÉNÉRATIONNELLE</h2>
+            <p>1 fois par mois<br>14h00 à 16h00</p>
+          </article>
+        </section>
+
+        <section class="week-day" aria-label="Mercredi">
+          <h3>Mercredi</h3>
+          <article class="note schedule-note purple" tabindex="0">
+            <h2>ANGLAIS</h2>
+            <p>Toute la journée</p>
+          </article>
+          <article class="note schedule-note peach" tabindex="0">
+            <h2>CERCLE DE JOUEURS</h2>
+            <p>14h00 à 16h00</p>
+          </article>
+          <article class="note schedule-note pink" tabindex="0">
+            <h2>ÉLECTRONS LIBRES</h2>
+            <p>14h00 à 16h30</p>
+          </article>
+        </section>
+
+        <section class="week-day" aria-label="Jeudi">
+          <h3>Jeudi</h3>
+          <article class="note schedule-note blue" tabindex="0">
+            <h2>CAFÉ BLABLA</h2>
+            <p>1 fois par mois<br>09h30 à 11h30</p>
+          </article>
+          <article class="note schedule-note yellow" tabindex="0">
+            <h2>ATELIER VOLT</h2>
+            <p>14h00 à 17h00</p>
+          </article>
+          <article class="note schedule-note peach" tabindex="0">
+            <h2>LES DÉLICES DU JEUDI</h2>
+            <p>1 fois tous les 2 mois<br>14h00 à 17h00</p>
+          </article>
+          <article class="note schedule-note purple" tabindex="0">
+            <h2>ÉCHOS DU QUARTIER</h2>
+            <p>1 fois tous les 2 mois<br>10h00 à 11h30</p>
+          </article>
+        </section>
+
+        <section class="week-day" aria-label="Vendredi">
+          <h3>Vendredi</h3>
+          <article class="note schedule-note pink" tabindex="0">
+            <h2>LA MICRO-FOLIE LES TOUT-PETITS</h2>
+            <p>1/2<br>09h30 à 11h30</p>
+          </article>
+          <article class="note schedule-note yellow" tabindex="0">
+            <h2>LA FABRIQUE ASSOCIATIVE</h2>
+            <p>09h30 à 12h00</p>
+          </article>
+        </section>
+
+        <section class="week-day" aria-label="Samedi">
+          <h3>Samedi</h3>
+          <article class="note schedule-note peach" tabindex="0">
+            <h2>FORME EN FOLIE</h2>
+            <p>1/2<br>10h00 à 12h00 ou 14h00 à 15h00</p>
+          </article>
+          <article class="note schedule-note blue" tabindex="0">
+            <h2>ATELIER VOLT</h2>
+            <p>09h30 à 12h00</p>
+          </article>
+          <article class="note schedule-note purple" tabindex="0">
+            <h2>RIGOL’JEUX</h2>
+            <p>1 fois par mois<br>14h00 à 15h30</p>
+          </article>
+        </section>
+
+      </div>
+    </section>
 
     <!-- POST-IT -->
     <section class="board" aria-label="Activités du centre socioculturel">
@@ -418,9 +664,9 @@
       </article>
 
       <article class="note blue n2" tabindex="0">
-        <h2>RIGO'JEUX</h2>
+        <h2>RIGOL'JEUX</h2>
         <p>
-          1 samedi par mois Samedi Rigo'jeux est un atelier jeux de sociétés
+          1 samedi par mois Samedi Rigol'jeux est un atelier jeux de sociétés
           parents-enfants convivial et gratuit
         </p>
       </article>
@@ -444,44 +690,50 @@
       </article>
 
       <article class="note yellow n5" tabindex="0">
-        <h2>LES DÉLICES DU JEUDI</h2>
+        <h2>LES GOURMANDISES DU JEUDI</h2>
         <p>
-          1 fois par mois, le deuxième jeudi du mois de 14h à 17h créer un
-          lien social entre habitants des différents quartiers autour d'une
-          activité gourmande
+          Apprenez à réaliser de savoureuses recettes sucrées, économiques et faciles à refaire chez vous ! Un atelier pâtisserie itinérant qui voyage chaque mois d'un centre socioculturel à un autre pour cuisiner et partager une dégustation ensemble.
         </p>
       </article>
 
       <article class="note peach n6" tabindex="0">
-        <h2>FRIGO CHALLENGE</h2>
+        <h2>ENTRE PARENT ’AISE</h2>
         <p>
-          Un projet ludique, anti-gaspi et un peu challenge autour de la
-          question : "qu'est ce que je fais avec ce qu'il y a dans mon frigo?"
+          Espace d’échange entre parents autour de sujets du quotidien :
+          éducation, bien-être familial, gestion des émotions, etc.
+          Des intervenants spécialisés peuvent être invités pour approfondir
+          certaines thématiques.
         </p>
       </article>
 
       <article class="note blue n7" tabindex="0">
-        <h2>LA SARBACANE</h2>
+        <h2>ÉCHOS DU QUARTIER</h2>
         <p>
-          La Sarbacane sportive est une activité de précision qui consiste
-          à travers un tube, uniquement grâce au souffle, à atteindre une cible.
+          Un temps de rencontre et de parole libre autour d'un petit-déjeuner
+          convivial ! Venez échanger sur la vie locale, exprimer vos besoins,
+          proposer vos idées et créer du lien avec vos voisins et les partenaires
+          du territoire.
         </p>
       </article>
 
       <article class="note peach n8" tabindex="0">
-        <h2>ARTS URBAINS</h2>
+        <h2>PASSERELLE INTERGÉNÉRATIONNELLE</h2>
         <p>
-          Le projet Arts urbains propose de faire découvrir différentes formes
-          d'expression artistique inspirées de la culture urbaine
+          Venez passer un après-midi chaleureux sous le signe du jeu et de la
+          bonne humeur ! Que vous soyez un expert des cartes ou un passionné de
+          jeux de plateau, venez former des équipes intergénérationnelles et
+          partager un goûter convivial avec les habitants et séniors de votre
+          quartier et de la Maison Intergénérationnel.
         </p>
       </article>
 
       <article class="note yellow n9" tabindex="0">
-        <h2>LE CAFÉ NATURE</h2>
+        <h2>FORME EN FOLIE</h2>
         <p>
-          Le café Nature est un moment convivial consacré à la découverte et
-          à l'échange autour de la nature, de l'environnement, de la pêche,
-          de la chasse ...
+          Équilibrez votre corps et votre esprit grâce à nos ateliers du samedi !
+          Alternez entre séances de stretching pour vous assouplir et séances de
+          yoga immersif au cœur du Musée Numérique de la Micro-Folie. Un moment
+          accessible à tous, pour se détendre dans une ambiance conviviale.
         </p>
       </article>
 
@@ -527,14 +779,9 @@
 
     <!-- BOUTON DU BAS -->
     <div class="bottom">
-      <a
-        class="register"
-        href="https://forms.gle/bwHJy7rJsUghjX3z8"
-        target="_blank"
-        rel="noopener"
-      >
+      <button class="register" type="button">
         INSCRIPTIONS
-      </a>
+      </button>
     </div>
 
   </main>
